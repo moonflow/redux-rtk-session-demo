@@ -1,5 +1,6 @@
 import {createStore} from "redux";
-import {useEffect, useReducer, useState} from "react";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 interface CounterAction {
     type: 'counter/incremented' | 'counter/decremented'
@@ -16,20 +17,17 @@ function counterReducer(state = { value: 0 }, action: CounterAction) {
     }
 }
 
-let store = createStore(counterReducer)
+export const store = createStore(counterReducer)
 
-export const ReduxCounter = () => {
-    const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
+export const ReactReduxCounter = () => {
+    const count = useSelector(state => (state as any).value)
+    const dispatch = useDispatch()
 
-    useEffect(() => {
-        store.subscribe(forceUpdate)
-    }, [])
-
-    const onIncreaseClick = () => store.dispatch({ type: 'counter/incremented' });
-    const onDecreaseClick = () => store.dispatch({ type: 'counter/decremented' })
+    const onIncreaseClick = () => dispatch({ type: 'counter/incremented' });
+    const onDecreaseClick = () => dispatch({ type: 'counter/decremented' })
     return (<div>
-        <h3>SetStateCounter</h3>
-        <div>{store.getState().value}</div>
+        <h3>ReactReduxCounter</h3>
+        <div>{count}</div>
         <button onClick={onIncreaseClick}>increase</button>
         <button onClick={onDecreaseClick}>decrease</button>
     </div>)
