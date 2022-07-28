@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {configureStore, createSlice} from "@reduxjs/toolkit";
 
 const counterSlice = createSlice({
-    name: 'counter1',
+    name: 'ReduxToolkitCounter',
     initialState: {
         value: 0
     },
@@ -17,7 +17,9 @@ const counterSlice = createSlice({
             state.value += 1
         },
         decremented: state => {
-            state.value -= 1
+            if(state.value > 0) {
+                state.value -= 1
+            }
         }
     }
 })
@@ -25,11 +27,13 @@ const counterSlice = createSlice({
 const { incremented, decremented } = counterSlice.actions
 
 export const store = configureStore({
-    reducer: counterSlice.reducer
+    reducer: {
+        counter : counterSlice.reducer
+    }
 })
 
 export const ReduxToolkitCounter = () => {
-    const count = useSelector(state => (state as any).value)
+    const count = useSelector(state => (state as any).counter.value)
     const dispatch = useDispatch()
 
     const onIncreaseClick = () => dispatch(incremented());
