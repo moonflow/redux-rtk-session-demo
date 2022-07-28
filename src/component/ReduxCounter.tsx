@@ -28,7 +28,7 @@ export const ReduxCounter = () => {
     const onIncreaseClick = () => store.dispatch({ type: 'counter/incremented' });
     const onDecreaseClick = () => store.dispatch({ type: 'counter/decremented' })
     return (<div>
-        <h3>SetStateCounter</h3>
+        <h3>ReduxCounter</h3>
         <div>{store.getState().value}</div>
         <button onClick={onIncreaseClick}>increase</button>
         <button onClick={onDecreaseClick}>decrease</button>

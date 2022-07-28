@@ -39,7 +39,7 @@ export const ReduxToolkitCounter = () => {
     const onIncreaseClick = () => dispatch(incremented());
     const onDecreaseClick = () => dispatch(decremented());
     return (<div>
-        <h3>ReactReduxCounter</h3>
+        <h3>ReduxToolkitCounter</h3>
         <div>{count}</div>
         <button onClick={onIncreaseClick}>increase</button>
         <button onClick={onDecreaseClick}>decrease</button>
